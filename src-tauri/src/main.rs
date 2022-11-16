@@ -10,8 +10,9 @@ fn get_access_token(code: &str) -> Option<String> {
 }
 
 #[tauri::command]
-fn get_rooster() -> Vec<Vec<String>> {
-  vec![vec!["yo".to_string()], vec!["sup".to_string()]]
+fn get_rooster(access_token: &str, week: u32, year: u32, leerling_nummer: u32) -> Option<String> {
+  let link = format!(r"https://coornhert-gymnasium.zportal.nl/api/v3/liveschedule?access_token={}&student={}&week={}{}", access_token, leerling_nummer, year, week);
+  attohttpc::get(link).send().and_then(attohttpc::Response::text).ok()
 }
 
 fn main() {
