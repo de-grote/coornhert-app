@@ -2,9 +2,8 @@
 name = "app"
 version = "0.1.0"
 description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+authors = ["de_grote", "AllardDL"]
+repository = "https://github.com/de-grote/coornhert-app"
 default-run = "app"
 edition = "2021"
 rust-version = "1.65.0"
