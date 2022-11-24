@@ -1,8 +1,22 @@
-# coornhert app
+# Coornhert app
+An application built with Tauri to combine different school applications into one.
 
-<details>
-<summary>the app is in Dutch and so will the readme</summary>
-cry about it
-</details>
+## 💻 Developing
+To help develop coornhert-app, follow these instructions:
 
-readme wordt nog (niet) aan gewerkt
+First clone the repository and download all dependencies (this may take a while).
+```shell
+ $ git clone https://github.com/de-grote/coornhert-app.git
+ $ cd coornhert-app
+ $ npm i
+ $ cargo install tauri-cli
+```
+
+To start the app locally run:
+```shell
+ $ cargo tauri dev
+```
+Or build it:
+```shell
+ $ cargo tauri build
+```
