@@ -1,5 +1,4 @@
 <script>
-  import Picture from "$lib/Picture.svelte";
   import Access from "$lib/Access.svelte";
   import RoosterContainer from "$lib/RoosterContainer.svelte";
   import Rooster from "$lib/Rooster.svelte";
@@ -14,5 +13,9 @@
 <RoosterContainer>
   <Rooster />
 </RoosterContainer>
-<br />
-<Picture />
+
+<style>
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+</style>

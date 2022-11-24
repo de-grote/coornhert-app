@@ -1,14 +1,14 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/tauri";
-  import { access_token } from "./info"
+  import { access_token } from "./info";
 
   let code = "";
   let success: boolean | null = null;
 
   async function getAccessToken() {
     let response: string = await invoke("get_access_token", { code });
-    console.log(response)
-    if (response == "") return success = false;
+    console.log(response);
+    if (response == "") return (success = false);
     const json = JSON.parse(response);
     access_token.set(json.access_token);
     success = true;
@@ -35,5 +35,8 @@
   }
   .success {
     color: green;
+  }
+  p {
+    font-family: Arial, Helvetica, sans-serif;
   }
 </style>

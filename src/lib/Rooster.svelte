@@ -2,6 +2,7 @@
   import { invoke } from "@tauri-apps/api/tauri";
   import { get } from "svelte/store";
   import { access_token, leerlingNummer } from "./info";
+  import RoosterItem from "./RoosterItem.svelte";
   import type { Rooster } from "./roosterType";
 
   let now = new Date();
@@ -25,20 +26,16 @@
     return date.getFullYear();
   })();
 
-  function dayIndex(time: number): number {
-    let d = new Date(time);
-    return d.getUTCDate() - 1;
-  }
-  
-  function timeIndex(timeslot: string): number {
-    return Number.parseInt(timeslot, 16) - 1;
-  }
-
   let token = "";
   access_token.subscribe((v) => (token = v));
 
   async function getRooster(): Promise<Rooster> {
-    const r: string = await invoke("get_rooster", { accessToken: token, week, year, leerlingNummer: get(leerlingNummer) });
+    const r: string = await invoke("get_rooster", {
+      accessToken: token,
+      week,
+      year,
+      leerlingNummer: get(leerlingNummer)
+    });
     return JSON.parse(r);
   }
 </script>
@@ -48,29 +45,7 @@
     {#await getRooster()}
       <p>laden...</p>
     {:then rooster}
-      {#each rooster.response.data[0].appointments.filter(x => x.status.length) as r}
-        <tr>
-          <td>
-            <details>
-              <summary>
-                {@html `${r.subjects.map(x => x.replace("_", " "))}<br>lokaal ${r.locations}`}
-              </summary>
-              {JSON.stringify(r)}
-            </details>
-          </td>
-
-          <!-- {#each r.actions as a}
-            <td>
-              <details>
-                <summary>
-                  {a.appointment.subjects}
-                </summary>
-                {JSON.stringify(a.appointment)}
-              </details>
-            </td>
-          {/each} -->
-        </tr>
-      {/each}
+      <RoosterItem {rooster} />
     {:catch err}
       <p>
         <details>
@@ -85,12 +60,11 @@
 </table>
 
 <style>
-  table,
-  tr,
-  td {
+  table {
     border: 1px solid black;
   }
-  td {
-    padding: 8px;
+  
+  p {
+    font-family: Arial, Helvetica, sans-serif;
   }
 </style>
