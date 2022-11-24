@@ -8,8 +8,6 @@
     for (let i of rooster.response.data[0].appointments.filter((x) => x.status.length)) {
       const id = i.startTimeSlotName + (new Date(i.start*1000)).getDay().toString();
       let grid = document.getElementById(id)!;
-      console.log(id, grid);
-      console.log(i)
       grid.innerHTML = `<p><details><summary>${i.subjects.map((x) =>
         x.replace("_", " ")
       )}<br>lokaal ${i.locations}</summary>${JSON.stringify(i)}</details></p>`;

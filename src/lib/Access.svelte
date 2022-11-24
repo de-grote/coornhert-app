@@ -7,7 +7,6 @@
 
   async function getAccessToken() {
     let response: string = await invoke("get_access_token", { code });
-    console.log(response);
     if (response == "") return (success = false);
     const json = JSON.parse(response);
     access_token.set(json.access_token);
