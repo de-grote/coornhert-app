@@ -63,8 +63,4 @@
   table {
     border: 1px solid black;
   }
-  
-  p {
-    font-family: Arial, Helvetica, sans-serif;
-  }
 </style>

@@ -35,7 +35,4 @@
   .success {
     color: green;
   }
-  p {
-    font-family: Arial, Helvetica, sans-serif;
-  }
 </style>

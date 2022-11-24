@@ -15,7 +15,7 @@
 </RoosterContainer>
 
 <style>
-  h1 {
+  :global(h1, p) {
     font-family: Arial, Helvetica, sans-serif;
   }
 </style>
