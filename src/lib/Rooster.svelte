@@ -59,7 +59,11 @@
   {/if}
 </table>
 
-<style>
+<style lang="scss">
+  @import "../global";
+  p {
+    @include text;
+  }
   table {
     border: 1px solid black;
   }
