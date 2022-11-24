@@ -25,6 +25,15 @@
     return date.getFullYear();
   })();
 
+  function dayIndex(time: number): number {
+    let d = new Date(time);
+    return d.getUTCDate() - 1;
+  }
+  
+  function timeIndex(timeslot: string): number {
+    return Number.parseInt(timeslot, 16) - 1;
+  }
+
   let token = "";
   access_token.subscribe((v) => (token = v));
 
@@ -39,19 +48,18 @@
     {#await getRooster()}
       <p>laden...</p>
     {:then rooster}
-      {#each rooster.response.data[0].appointments as r}
+      {#each rooster.response.data[0].appointments.filter(x => x.status.length) as r}
         <tr>
-
           <td>
             <details>
               <summary>
-                {r.subjects}
+                {@html `${r.subjects.map(x => x.replace("_", " "))}<br>lokaal ${r.locations}`}
               </summary>
               {JSON.stringify(r)}
             </details>
           </td>
 
-          {#each r.actions as a}
+          <!-- {#each r.actions as a}
             <td>
               <details>
                 <summary>
@@ -60,7 +68,7 @@
                 {JSON.stringify(a.appointment)}
               </details>
             </td>
-          {/each}
+          {/each} -->
         </tr>
       {/each}
     {:catch err}
