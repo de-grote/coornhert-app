@@ -14,8 +14,9 @@
   <Rooster />
 </RoosterContainer>
 
-<style>
+<style lang="scss">
   :global(h1, p) {
     font-family: Arial, Helvetica, sans-serif;
+    color: $pink; // Voorbeeld van global variable gebruiken
   }
 </style>
