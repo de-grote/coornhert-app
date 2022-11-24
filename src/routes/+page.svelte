@@ -15,7 +15,6 @@
 </RoosterContainer>
 
 <style lang="scss">
-  @import "../global";
   h1 {
     @include text;
   }

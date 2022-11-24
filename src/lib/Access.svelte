@@ -29,7 +29,6 @@
 </p>
 
 <style lang="scss">
-  @import "../global";
   p {
     @include text
   }
