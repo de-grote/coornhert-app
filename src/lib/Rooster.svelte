@@ -1,35 +1,18 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/tauri";
   import { get } from "svelte/store";
-  import { access_token, leerlingNummer } from "./info";
+  import { access_token, leerlingNummer, selectedWeek, selectedYear } from "./info";
   import RoosterItem from "./RoosterItem.svelte";
   import type { Rooster } from "./roosterType";
 
-  let now = new Date();
-
-  let week = (function () {
-    const date = new Date(now.getTime());
-    date.setHours(0, 0, 0, 0);
-    date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
-    const week1 = new Date(date.getFullYear(), 0, 4);
-    return (
-      1 +
-      Math.round(
-        ((date.getTime() - week1.getTime()) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7
-      )
-    );
-  })();
-
-  let year = (function () {
-    const date = new Date(now.getTime());
-    date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
-    return date.getFullYear();
-  })();
-
+  let week = 0;
+  let year = 0;
   let token = "";
+  selectedWeek.subscribe((v) => (week = v));
+  selectedYear.subscribe((v) => (year = v));
   access_token.subscribe((v) => (token = v));
 
-  async function getRooster(): Promise<Rooster> {
+  async function getRooster(week: number, year: number): Promise<Rooster> {
     const r: string = await invoke("get_rooster", {
       accessToken: token,
       week,
@@ -42,7 +25,7 @@
 
 <table>
   {#if token}
-    {#await getRooster()}
+    {#await getRooster(week, year)}
       <p>laden...</p>
     {:then rooster}
       <RoosterItem {rooster} />
