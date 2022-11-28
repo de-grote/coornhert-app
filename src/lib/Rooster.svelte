@@ -13,6 +13,7 @@
   access_token.subscribe((v) => (token = v));
 
   async function getRooster(week: number, year: number): Promise<Rooster> {
+    console.log(week, year);
     const r: string = await invoke("get_rooster", {
       accessToken: token,
       week,
@@ -23,12 +24,21 @@
   }
 </script>
 
-<table>
+<table id="rooster">
   {#if token}
     {#await getRooster(week, year)}
       <p>laden...</p>
     {:then rooster}
-      <RoosterItem {rooster} />
+      {#if Math.floor(rooster.response.status / 100) === 2}
+        <RoosterItem {rooster} />
+      {:else}
+        <p>
+          <details>
+            <summary>{rooster.response.message}</summary>
+            {rooster.response.details}
+          </details>
+        </p>
+      {/if}
     {:catch err}
       <p>
         <details>

@@ -7,7 +7,7 @@
   function incrementWeek() {
     if (week == 53) {
       selectedYear.update((y) => {
-        y + 1;
+        return y + 1;
       });
       selectedWeek.set(0);
     } else {
@@ -17,7 +17,7 @@
   function decrementWeek() {
     if (week == 1) {
       selectedYear.update((y) => {
-        y - 1;
+        return y - 1;
       });
       selectedWeek.set(53);
     } else {
