@@ -20,7 +20,7 @@
   {#if success === null}
     <br />
   {:else if success}
-    <span class="success">Uw koppelingscode is succesvol aangepast!</span>
+    <span class="success">Uw koppelingscode is succesvol aangepast! gefeliciteerd</span>
     <br />
   {:else}
     <span class="fail">Uw koppelingscode is ongeldig.</span>
