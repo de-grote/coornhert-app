@@ -13,7 +13,6 @@
   access_token.subscribe((v) => (token = v));
 
   async function getRooster(week: number, year: number): Promise<Rooster> {
-    console.log(week, year);
     const r: string = await invoke("get_rooster", {
       accessToken: token,
       week,

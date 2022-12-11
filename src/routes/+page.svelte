@@ -4,9 +4,11 @@
   import Rooster from "$lib/Rooster.svelte";
   import LeerlingNummer from "$lib/LeerlingNummer.svelte";
   import WeekSelector from "$lib/WeekSelector.svelte";
+  import InvalidateChaches from "$lib/InvalidateChaches.svelte";
 </script>
 
 <h1>Coornhert Rooster App</h1>
+<InvalidateChaches />
 <LeerlingNummer />
 <br />
 <Access />
